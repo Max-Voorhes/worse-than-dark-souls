@@ -223,7 +223,7 @@ function gameLoop() {
 function garbagecollector(){
     for (var j = 0; j < bullets.length; j++) {
             if(bullets[j].toremove === true){
-                bullets.splice(j, 1)
+                bullets.splice(j, 1);
             }
     }
 }

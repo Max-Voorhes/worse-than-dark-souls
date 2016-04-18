@@ -223,7 +223,7 @@ function gameLoop() {
 function garbagecollector(){
     for (var j = 0; j < bullets.length; j++) {
             if(bullets[j].toremove === true){
-                bullets.splice(j, 1)
+                bullets.splice(j, 1);
             }
     }
 }
@@ -235,7 +235,7 @@ var wave1 = setInterval(function(){
     hardenemies.push(new Hardenemy(tempRand, 0));
     superhardenemies.push(new Superhardenemy(tempRand, 0));
 }, 
-10);
+100);
 
 
 function isColliding(thing1, thing2){
