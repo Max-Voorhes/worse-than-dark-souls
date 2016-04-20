@@ -4,21 +4,7 @@ var bullets = [];
 var enemies = [];
 var hardenemies = [];
 var superhardenemies = [];
-// var gameover = [];
 var die = [];
-
-// var line = {
-//     xPos: 0,
-//     yPos: 400,
-//     height: 50,
-//     width: 400,
-    
-//     draw: function() {
-//         ctx.rect(line.xPos, line.yPos, this.width, this.height);
-//         ctx.stroke();
-//     }
-// };
-
 
 var box = {
     xPos: 200,
@@ -201,14 +187,6 @@ function gameLoop() {
         if(isColliding(box, enemies[i])){
             box.splice(i, 1);
         }
-        // for(var j = 0; j < bullets.length; j++){
-        //     if(isColliding(enemies[i], bullets[j])){
-        //         bullets.splice(j, 1);
-        //     }
-        // if(isColliding(bullets, enemies[i])){
-        //     enemies.splice(i, 1);
-        //     bullets.splice(bullets, 1);
-        // }
     }
     
     for (var i = 0; i < die.length; i++) {
