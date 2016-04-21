@@ -2,11 +2,13 @@ var mycanvas = document.getElementById("mycanvas");
 var ctx = mycanvas.getContext("2d");
 var bullets = [];
 var enemies = [];
-var hardenemies = [];
-var superhardenemies = [];
 var die = [];
-
-
+var line = {
+    xPos: 0,
+    yPos: 500,
+    height: 20,
+    width: 400,
+};
 var box = {
     xPos: 200,
     yPos: 400,
@@ -89,42 +91,7 @@ function Enemy(xPos, yPos) {
         this.yPos -= -1;
     };
 }
-
-function Hardenemy(xPos, yPos) {
-    this.xPos = xPos;
-    this.yPos = yPos;
-    this.height = 40;
-    this.width = 40;
-    this.draw = function() {
-        ctx.rect(this.xPos, this.yPos, this.width, this.height);
-        ctx.stroke();
-    };
-    var tempRand = Math.random() * mycanvas.width;
-    this.move = function() {
-        this.xPos -= tempRand;
-        this.yPos -= -10;
-    };
-}
-
-function Superhardenemy(xPos, yPos) {
-    this.xPos = xPos;
-    this.yPos = yPos;
-    this.height = 50;
-    this.width = 50;
-    this.draw = function() {
-        ctx.rect(this.xPos, this.yPos, this.width, this.height);
-        ctx.stroke();
-    };
-    var tempRand = Math.random() * mycanvas.width;
-    this.move = function() {
-        this.xPos -= tempRand;
-        this.yPos -= -100;
-    };
-}
-
-    
-    
-    
+   
 document.addEventListener("keydown", function(evt) {
     if (evt.keyCode === 37) {
         box.goLeft = true;
@@ -188,6 +155,9 @@ function gameLoop() {
         if(isColliding(box, enemies[i])){
             box.splice(i, 1);
         }
+        if(isColliding(line, enemies[i])){
+            box.splice(i, 1);
+        }
     }
     
     for (var i = 0; i < die.length; i++) {
@@ -211,8 +181,6 @@ function garbagecollector(){
 var wave1 = setInterval(function(){
     var tempRand = Math.random() * mycanvas.width;
     enemies.push(new Enemy(tempRand - 2, 0));
-    hardenemies.push(new Hardenemy(tempRand, 0));
-    superhardenemies.push(new Superhardenemy(tempRand, 0));
 }, 
 1000);
 
