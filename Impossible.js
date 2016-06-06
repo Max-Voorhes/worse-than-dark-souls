@@ -9,6 +9,8 @@ var line = {
     height: 20,
     width: 400,
 };
+var score = 0;
+var scoredisplay = document.getElementById("scoredisplay");
 var box = {
     xPos: 200,
     yPos: 400,
@@ -145,6 +147,7 @@ function gameLoop() {
             if(isColliding(bullets[j], enemies[k])){
                 enemies.splice(k, 1);
                 bullets[j].toremove=true;
+                score = score + 100;
             } 
         }
         
@@ -165,6 +168,7 @@ function gameLoop() {
     }
     
     garbagecollector();
+    scoredisplay.innerHTML = "score:" + score;
     window.requestAnimationFrame(gameLoop);
 }
 
