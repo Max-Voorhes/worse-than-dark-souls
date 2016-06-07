@@ -1,29 +1,73 @@
 <!DOCTYPE HTML> 
 <html>
 <head>
-    <title>Worse than Dark Souls: Easy</title>
+    <title>Worse Than Dark Souls: Easy</title>
 </head>
 <style type="text/css">
     body {
             background-color:yellow;
             font-family:monospace;
         }
+    /*p {*/
+    /*    position:absolute;*/
+    /*    left:75%;*/
+    /*    top:10%;*/
+    /*}*/
+    /*#scoredisplay {*/
+    /*    position:absolute;*/
+    /*    left:75%;*/
+    /*    top:10%;*/
+    /*}*/
+    #container {
+        vertical-align:top;
+        width:45%;
+        display:inline-block;
+    }
+    li {
+        vertical-align:top;
+        text-align:left;
+        width:45%;
+        display:inline-block;
+    }
+    #restart {
+        width:75px;
+        height:25px;
+        font-size:15px;
+        font-family:monospace;
+    }
+    #pause {
+        width:75px;
+        height:25px;
+        font-size:15px;
+        font-family:monospace;
+    }
+    td {
+        width:45%;
+    }
 </style>
 <body>
     <center>
-        <h1>Worst Than Dark Souls: Easy</h1>
+        <h1>Worse Than Dark Souls: Easy</h1>
     <canvas id="mycanvas" width="400px" height="500px" style="border: 2px solid black"></canvas>
-    <p>Press refresh on your browser to start over.</p>
+    <div id="container">
+    <p>Controls:</p>
     <p>Left and right arrow keys: Moves left and right.</p>
     <p>Spacebar: Shoot</p>
-    <p>If enemy box hits player, you lose.</p>
-    <p>If enemy box reaches the bottom, you lose.</p>
+    <p>Press the restart button or press r on the keyboard to start over.</p>
+    <input type="button" value="restart" id="restart">
+    <p>If you do click the restart button, click the game after you click restart before you press the spacebar so you don't keep restarting the game.</p>
+    <p>Press the pause button to pause the game.</p>
+    <input type="button" value="pause" id="pause">
+    <h3>Rules</h3>
+    <p>If you get hit by one of the boxes, you lose the game.</p>
+    <p>If one of the boxes reaches the bottom, you lose the game.</p>
     <div id="scoredisplay">
         
     </div>
+    </div>
     </center>
     <script src="Easy.js"></script>
-    <ul id="navbar">
+        <ul id="navbar">
             <li><a href="SuperEasy.html">Super Easy</a></li>
             <li><a href="Medium.html">Medium</a></li>
             <li><a href="Hard.html">Hard</a></li>

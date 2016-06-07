@@ -2,15 +2,34 @@ var mycanvas = document.getElementById("mycanvas");
 var ctx = mycanvas.getContext("2d");
 var bullets = [];
 var enemies = [];
+var gameover = false;
 var die = [];
+var restart = document.getElementById("restart");
+var pauseGame = document.getElementById("pause");
+var gamePaused = false;
+var score = 0;
+var scoredisplay = document.getElementById("scoredisplay");
+var requestId;
+var game;
 var line = {
     xPos: 0,
     yPos: 500,
     height: 20,
     width: 400,
 };
-var score = 0;
-var scoredisplay = document.getElementById("scoredisplay");
+
+pauseGame.addEventListener("click", function() {
+    if(gamePaused === true){
+        gamePaused = false;
+        requestId = window.requestAnimationFrame(gameLoop);
+        pauseGame.value = "pause";
+    } else {
+        gamePaused = true;
+        window.cancelAnimationFrame(requestId);
+        pauseGame.value = "resume";
+    }
+});
+
 var box = {
     xPos: 200,
     yPos: 400,
@@ -67,6 +86,10 @@ function Bullet(xPos, yPos ) {
     };
     this.move = function() {
         this.yPos -= 10;
+        if(this.yPos < -5){
+            this.toremove = true;
+            }
+        
         if(this.yPos < 0){
             return false;
             
@@ -75,6 +98,7 @@ function Bullet(xPos, yPos ) {
         
         return true;
         }
+        
     };
     this.toremove=false;
 }
@@ -91,9 +115,25 @@ function Enemy(xPos, yPos) {
     this.move = function() {
         this.xPos -= 0;
         this.yPos -= -10;
+        if(this.yPos > 500){
+            this.toremove = true;
+        }
     };
 }
 
+function pauseGame() {
+    game = clearTimeout(game);
+    pauseGame.addEventListener("click", pauseGame);
+    if(!gamePaused){
+        gamePaused = true;
+    } else if (gamePaused){
+        game = setTimeout(gameLoop, 500/30);
+        gamePaused = false;
+    }
+}
+    
+    
+    
 document.addEventListener("keydown", function(evt) {
     if (evt.keyCode === 37) {
         box.goLeft = true;
@@ -110,8 +150,20 @@ document.addEventListener("keydown", function(evt) {
     if (evt.keyCode === 32) {
         box.shooting = true;
     }
- 
-
+    if (evt.keycode === 80){
+        
+    }
+        
+    if (evt.keyCode === 82) {
+        window.cancelAnimationFrame(requestId);
+        score = 0;
+        gameover = false;
+        enemies = [];
+        bullets = [];
+        box.xPos = 200;
+        box.yPos = 400;
+        gameLoop();
+    }
 });
 
 document.addEventListener("keyup", function(evt) {
@@ -145,7 +197,7 @@ function gameLoop() {
         bullets[j].draw();
         for(var k = 0; k < enemies.length; k++){
             if(isColliding(bullets[j], enemies[k])){
-                enemies.splice(k, 1);
+                enemies[k].toremove=true;
                 bullets[j].toremove=true;
                 score = score + 100;
             } 
@@ -156,10 +208,12 @@ function gameLoop() {
         enemies[i].move();
         enemies[i].draw();
         if(isColliding(box, enemies[i])){
-            box.splice(i, 1);
+            gameover = true;
+            alert("Press R to Restart.");
         }
         if(isColliding(line, enemies[i])){
-            box.splice(i, 1);
+            gameover = true;
+            alert("Press R to Restart.");
         }
     }
     
@@ -168,10 +222,25 @@ function gameLoop() {
     }
     
     garbagecollector();
-    scoredisplay.innerHTML = "score:" + score;
-    window.requestAnimationFrame(gameLoop);
+    scoredisplay.innerHTML = "score: " + score;
+    if(gameover === false ){
+    requestId = window.requestAnimationFrame(gameLoop);
+    } else{
+        window.cancelAnimationFrame(requestId);
+        gameover;
+    }
 }
 
+restart.addEventListener("click", function(){
+    window.cancelAnimationFrame(requestId);
+    score = 0;
+    gameover = false;
+    enemies = [];
+    bullets = [];
+    box.xPos = 200;
+    box.yPos = 400;
+    gameLoop();
+});
 
 function garbagecollector(){
     for (var j = 0; j < bullets.length; j++) {
@@ -179,14 +248,18 @@ function garbagecollector(){
                 bullets.splice(j, 1);
             }
     }
+    for (var k = 0; k < enemies.length; k++){
+        if(enemies[k].toremove === true){
+            enemies.splice(k, 1);
+        }
+    }
 }
 
 
 var wave1 = setInterval(function(){
     var tempRand = Math.random() * mycanvas.width;
-    enemies.push(new Enemy(tempRand - 2, 0));
-}, 
-1);
+    enemies.push(new Enemy(tempRand - 5, 0));
+}, 1);
 
 
 function isColliding(thing1, thing2){

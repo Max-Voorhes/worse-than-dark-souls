@@ -1,0 +1,57 @@
+var line = {
+    xPos: 0,
+    yPos: 500,
+    height: 20,
+    width: 400,
+};
+if(isColliding(line, enemies[i])){
+            box.splice(i, 1);
+        }
+        if(isColliding(line, enemies[i])){
+            gameover = true;
+        }
+SuperEasy
+<script src="SuperEasy.js"></script>
+    <ul id="navbar">
+            <li><a href="Easy.html">Easy</a></li>
+            <li><a href="Medium.html">Medium</a></li>
+            <li><a href="Hard.html">Hard</a></li>
+            <li><a href="Impossible.html">Impossible</a></li>
+            <li><a href="index.html">Index</a></li>
+        </ul>
+Easy
+<script src="Easy.js"></script>
+        <ul id="navbar">
+            <li><a href="SuperEasy.html">Super Easy</a></li>
+            <li><a href="Medium.html">Medium</a></li>
+            <li><a href="Hard.html">Hard</a></li>
+            <li><a href="Impossible.html">Impossible</a></li>
+            <li><a href="index.html">Index</a></li>
+        </ul>
+Medium
+<script src="Medium.js"></script>
+        <ul id="navbar">
+            <li><a href="SuperEasy.html">Super Easy</a></li>
+            <li><a href="Easy.html">Easy</a></li>
+            <li><a href="Hard.html">Hard</a></li>
+            <li><a href="Impossible.html">Impossible</a></li>
+            <li><a href="index.html">Index</a></li>
+        </ul>
+Hard
+<script src="Hard.js"></script>
+        <ul id="navbar">
+            <li><a href="SuperEasy.html">Super Easy</a></li>
+            <li><a href="Easy.html">Easy</a></li>
+            <li><a href="Medium.html">Medium</a></li>
+            <li><a href="Impossible.html">Impossible</a></li>
+            <li><a href="index.html">Index</a></li>
+        </ul>
+Impossible
+<script src="Impossible.js"></script>
+        <ul id="navbar">
+            <li><a href="SuperEasy.html">Super Easy</a></li>
+            <li><a href="Easy.html">Easy</a></li>
+            <li><a href="Medium.html">Medium</a></li>
+            <li><a href="Hard.html">Hard</a></li>
+            <li><a href="index.html">Index</a></li>
+        </ul>
