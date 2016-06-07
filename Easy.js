@@ -150,8 +150,16 @@ document.addEventListener("keydown", function(evt) {
     if (evt.keyCode === 32) {
         box.shooting = true;
     }
-    if (evt.keycode === 80){
-        
+    if (evt.keyCode === 80){
+        if(gamePaused === true){
+            gamePaused = false;
+            requestId = window.requestAnimationFrame(gameLoop);
+            pauseGame.value = "pause";
+        } else {
+            gamePaused = true;
+            window.cancelAnimationFrame(requestId);
+            pauseGame.value = "resume";
+        }
     }
         
     if (evt.keyCode === 82) {
