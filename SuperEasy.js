@@ -157,6 +157,9 @@ document.addEventListener("keydown", function(evt) {
         bullets = [];
         box.xPos = 200;
         box.yPos = 400;
+        box.shooting = false;
+        box.goLeft = false;
+        box.goRight = false;
         gameLoop();
     }
 });
@@ -234,6 +237,9 @@ restart.addEventListener("click", function(){
     bullets = [];
     box.xPos = 200;
     box.yPos = 400;
+    box.shooting = false;
+    box.goLeft = false;
+    box.goRight = false;
     gameLoop();
 });
 
