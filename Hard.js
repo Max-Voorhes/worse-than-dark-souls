@@ -21,10 +21,15 @@ var line = {
 pauseGame.addEventListener("click", function() {
     if(gamePaused === true){
         gamePaused = false;
+        wave1 = setInterval(function(){
+            var tempRand = Math.random() * mycanvas.width;
+            enemies.push(new Enemy(tempRand - 5, 0));
+            }, 1000);
         requestId = window.requestAnimationFrame(gameLoop);
         pauseGame.value = "pause";
     } else {
         gamePaused = true;
+        clearInterval(wave1);
         window.cancelAnimationFrame(requestId);
         pauseGame.value = "resume";
     }
@@ -153,10 +158,15 @@ document.addEventListener("keydown", function(evt) {
     if (evt.keyCode === 80){
         if(gamePaused === true){
             gamePaused = false;
+            wave1 = setInterval(function(){
+            var tempRand = Math.random() * mycanvas.width;
+            enemies.push(new Enemy(tempRand - 5, 0));
+            }, 1000);
             requestId = window.requestAnimationFrame(gameLoop);
             pauseGame.value = "pause";
         } else {
             gamePaused = true;
+            clearInterval(wave1);
             window.cancelAnimationFrame(requestId);
             pauseGame.value = "resume";
         }
